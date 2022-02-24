@@ -1,0 +1,288 @@
+Foram 14 tópicos que abordaram desde os motivos de surgimento do git
+e suas funcionalidades.
+Eu já havia estudado um pouco de git anteriormente, mas o conteúdo
+serviu para relembrar alguns conceitos e me introduzir a outros
+
+Abaixo eu deixo uma cola dos comandos que me norteam
+
+### PASSOS DO GIT
+
+- **Estado Modificado**: Snapshot atual, no qual o trabalho é feito no momento. Arquivos no diretório de trabalho (add)
+- **Estado Preparado**: Os arquivos são marcados na sua versão atual atual. Stage Area (commit)
+- **Estado Consolidado:**  Dados são salvos no repositório onde o histórico é armazenado.  Este estado é compartilhado. Arquivo no diretório do github. (push)
+- **TERMOS DO GIT**
+    - `HEAD`: Estado atual do nosso código, ou seja, onde o Git nos colocou
+    - `Working tree`: Local onde os arquivos realmente estão sendo armazenados e editados
+    - `index`: Local onde o Git armazena o que será *commitado*, ou seja, o local entre a *working tree* e o repositório Git em si.
+- **COMANDOS**
+    - git config
+        - git config  - -local [user.name](http://user.name) "seu nome" > carimba seu nome em todo commit feito
+        - git config - - local [user.email](http://user.email) 'seu email" > carimba seu email em todo commit feito
+        - git config --list > para listar todas as configurações que o Git conseguir encontrar naquele momento:
+    - git init
+        - git init > inicia um repositório
+        - git init —bare > inicia um repositório puro, onde não há alterações de arquivo, apenas armazenamento (só serve para armazenar as alterações, não contém copias dios arquivos físicos)
+    - git remote
+        - git remote add "nome" (endereço) > conecta a pasta atual a um servidor externo ou interno
+        - git remote -v > mostra o endereço do repositório remoto ou local, depende da configuração realizada
+        - git remote rm [nome] > apaga remoto
+        - git remote rename origin [nome do servidor]
+    - git add
+        - git add . > adiciona todos os arquivos da pasta atual para monitoração
+    - git commit
+        - git commit -m"mensagem" > comita o arquivo com o arquivo com a mensagem
+    - git push
+        - git push  [nome do repositório de destino] [branch] > envia os commits para o servidor de acesso
+    - git clone
+        - git clone endereço > clona um repositório
+    - git pull
+        - git pull [nome do repositório][nome da branch] > pega os dados de um repositório remoto e traz
+        - git pull [nome do repositório][nome da branch] --allow-unrelated-histories > força a mescla dos arquivos possivelmente não relacionados
+    - git branch
+        - git branch [nome] > cria uma linha de trabalho, uma nova ramificação
+        - git branch > lista as ramificações de trabalho
+        - git branch -D <nome do branch > Para apagar o branch localmente:
+        - git push <nome do origin> <nome do branch> --delete > Para apagar o branch remotamente:
+    - git checkout
+        - git checkout [nome] > muda o ramo/linha de desenvolvimento
+        - git checkout -b [nome] > cria e te coloca em uma nova  branch
+        - git checkout - -[arquivo] > apaga o arquivo modificado dá area de add
+        - git checkout [7 primeiros números do commit desejado] > leva até onde est
+        
+        apagará as alterações feitas e não estará mais na zona de add
+        
+    - git gitignore
+        - gitignore . ignora os arquivos, no entanto, é necessário criar um arquivo com a extenção.gitignore e adicionar os itens que deverão ser ignorados neste
+        
+        exemplo de arquivo .gitignore:
+        $ cat .gitignore
+        *.[oa]
+        *~
+        
+        A primeira linha diz ao Git para ignorar todos os arquivos que terminem com “.o” ou “.a” – arquivos
+        objeto ou de arquivamento, que podem ser produtos do processo de compilação. A segunda linha
+        diz ao Git para ignorar todos os arquivos cujo nome termine com um til (~), que é usado por muitos
+        editores de texto, como o Emacs, para marcar arquivos temporários. Você também pode incluir
+        diretórios log, tmp ou pid; documentação gerada automaticamente; e assim por diante. Configurar
+        um arquivo .gitignore, antes de você começar um repositório, geralmente é uma boa ideia para
+        que você não inclua acidentalmente em seu repositório Git arquivos que você não quer.
+        As regras para os padrões que podem ser usados no arquivo .gitignore são as seguintes:
+        • Linhas em branco ou começando com # são ignoradas.
+        • Os padrões que normalmente são usados para nomes de arquivos funcionam.
+        • Você pode iniciar padrões com uma barra (/) para evitar recursividade.
+        • Você pode terminar padrões com uma barra (/) para especificar um diretório.
+        • Você pode negar um padrão ao fazê-lo iniciar com um ponto de exclamação (!).
+        Padrões de nome de arquivo são como expressões regulares simplificadas usadas em ambiente
+        
+        28
+        
+        shell. Um asterisco (*) casa com zero ou mais caracteres; [abc] casa com qualquer caracter dentro
+        dos colchetes (neste caso, a, b ou c); um ponto de interrogação (?) casa com um único caracter
+        qualquer; e caracteres entre colchetes separados por hífen ([0-9]) casam com qualquer caracter
+        entre eles (neste caso, de 0 a 9). Você também pode usar dois asteriscos para criar uma expressão
+        que case com diretórios aninhados; a/**/z casaria com a/z, a/b/z, a/b/c/z, e assim por diante.
+        Aqui está outro exemplo de arquivo .gitignore:
+        
+        # ignorar arquivos com extensão .a
+        
+        - .a
+        
+        # mas rastrear o arquivo lib.a, mesmo que você esteja ignorando os arquivos .a acima
+        
+        !lib.a
+        
+        # ignorar o arquivo TODO apenas no diretório atual, mas não em subdir/TODO
+        
+        /TODO
+        
+        # ignorar todos os arquivos no diretório build/
+        
+        build/
+        
+        # ignorar doc/notes.txt, mas não doc/server/arch.txt
+        
+        doc/*.txt
+        
+        # ignorar todos os arquivos .pdf no diretório doc/
+        
+        doc/**/*.pdf
+        
+    - git log
+        - git log > Mostra um histórico dos comandos realizados
+        - git log —oneline > mostra informaões em uma linha
+        - git log -p >mostra informações do que foi alterado no arquivo
+        - git log  - -graph > mostra as linhas de desenvolvimento
+    - git status
+        - git status > informações sobre
+        - git status -s > informações comprimidas sobre o projeto.
+        
+        Arquivos novos que não são rastreados têm um ?? do lado, novos arquivos que foram adicionados à
+        área de stage têm um A, arquivos modificados têm um M e assim por diante. Há duas colunas de
+        status na saída: a coluna da esquerda indica o status da área de stage e a coluna da direita indica o
+        status do diretório de trabalho.
+        
+    - git merge
+        - git merge [branch a ser mesclada],> cria um novo commit (automaticamente) mesclando o conteúdo da branch atual com a branch mesclada
+    - git rebase
+        - git rebase [branch a ser mesclada > ira pegar os commits feitos na branch a ser mesclados e atualizará na branch atual
+        
+    - git reset
+        - git reset HEAD [arquivo a ser tirado da stage area já adicionado com o add]
+        
+        este comando irá tirar da zonna de commit, e voltará para a zona add, mantendo as alterações feitas
+        
+    - git revert
+        - git revert [número do commit] > cria um commit desfazendo o commit terirado
+    - git stash
+        - git stash > Salva um arquivo para trabalho posterior, sem que este seja um coomit ou gere um log, arquivo salvo para trabalhar posteriormente
+        - git stash - -list > traz a lista de tudo que está salvo neste "compartimento"
+        - git stash apply [número do caso] >aplica as modificações feitas anteriormente
+        - git stash pop > retira a última alteração da zona de stash, faz o merge com as alterações que estavam armazenadas
+        
+    - git diff
+        - git diff [be98621 **..** 0850e6e **>** mostra a diferença dos estados entre os commits analisados
+        - git diff > mostra o que foi alterado mais ainda não foi commitado, assim que for comitado não irá mais aparecer no git diff
+    - git tag
+        - git tag -a [texto v.0.1.0 -m, por exemplo] > cira um marco, uma versão, por exemplo. O -m é opcional e significa que acompanhará uma mensagem
+        - git tag > mostra todas as versões que se tem disponível
+        - git push [servidor] [numero ou nome da tag] > envia a versão para o servidor
+- ORGANIZANDO FUNÇÕES
+    - **INICIANDO PROJETO**
+        - git init
+            - git init > inicia um repositório
+            - git init —bare > inicia um repositório puro, onde não há alterações de arquivo, apenas armazenamento (só serve para armazenar as alterações, não contém copias dios arquivos físicos)
+        - git config
+            - git config  - -local [user.name](http://user.name) "seu nome" > carimba seu nome em todo commit feito  (Pode -se usar o global no lugar do local se o mesmo usuário for manipular outras pastas do git)
+            - git config - - local [user.email](http://user.email) 'seu email" > carimba seu email em todo commit feito
+            - git config --list > para listar todas as configurações que o Git conseguir encontrar naquele momento:
+        - git remote
+            - git remote add "nome" (endereço) > conecta a pasta atual a um servidor externo ou interno
+            - git remote -v > mostra o endereço do repositório remoto ou local, depende da configuração realizada
+            - git remote rm [nome] > apaga remoto
+            - git remote rename origin [nome do servidor]
+    - **ARQUIVOS A SEREM IGNORADOS**
+        - git gitignore
+            - gitignore . ignora os arquivos, no entanto, é necessário criar um arquivo com a extenção.gitignore e adicionar os itens que deverão ser ignorados neste
+            
+            exemplo de arquivo .gitignore:
+            $ cat .gitignore
+            *.[oa]
+            *~
+            
+            A primeira linha diz ao Git para ignorar todos os arquivos que terminem com “.o” ou “.a” – arquivos
+            objeto ou de arquivamento, que podem ser produtos do processo de compilação. A segunda linha
+            diz ao Git para ignorar todos os arquivos cujo nome termine com um til (~), que é usado por muitos
+            editores de texto, como o Emacs, para marcar arquivos temporários. Você também pode incluir
+            diretórios log, tmp ou pid; documentação gerada automaticamente; e assim por diante. Configurar
+            um arquivo .gitignore, antes de você começar um repositório, geralmente é uma boa ideia para
+            que você não inclua acidentalmente em seu repositório Git arquivos que você não quer.
+            As regras para os padrões que podem ser usados no arquivo .gitignore são as seguintes:
+            • Linhas em branco ou começando com # são ignoradas.
+            • Os padrões que normalmente são usados para nomes de arquivos funcionam.
+            • Você pode iniciar padrões com uma barra (/) para evitar recursividade.
+            • Você pode terminar padrões com uma barra (/) para especificar um diretório.
+            • Você pode negar um padrão ao fazê-lo iniciar com um ponto de exclamação (!).
+            Padrões de nome de arquivo são como expressões regulares simplificadas usadas em ambiente
+            
+            28
+            
+            shell. Um asterisco (*) casa com zero ou mais caracteres; [abc] casa com qualquer caracter dentro
+            dos colchetes (neste caso, a, b ou c); um ponto de interrogação (?) casa com um único caracter
+            qualquer; e caracteres entre colchetes separados por hífen ([0-9]) casam com qualquer caracter
+            entre eles (neste caso, de 0 a 9). Você também pode usar dois asteriscos para criar uma expressão
+            que case com diretórios aninhados; a/**/z casaria com a/z, a/b/z, a/b/c/z, e assim por diante.
+            Aqui está outro exemplo de arquivo .gitignore:
+            
+            # ignorar arquivos com extensão .a
+            
+            - .a
+            
+            # mas rastrear o arquivo lib.a, mesmo que você esteja ignorando os arquivos .a acima
+            
+            !lib.a
+            
+            # ignorar o arquivo TODO apenas no diretório atual, mas não em subdir/TODO
+            
+            /TODO
+            
+            # ignorar todos os arquivos no diretório build/
+            
+            build/
+            
+            # ignorar doc/notes.txt, mas não doc/server/arch.txt
+            
+            doc/*.txt
+            
+            # ignorar todos os arquivos .pdf no diretório doc/
+            
+            doc/**/*.pdf
+            
+    - **ALTERANDO OS ESTADOS DO GIT** stages áreas
+        - git add
+            - git add . > adiciona todos os arquivos da pasta atual para monitoração
+        - git commit
+            - git commit -m"mensagem" > comita o arquivo com o arquivo com a mensagem
+        - git push
+            - git push  [nome do repositório de destino] [branch] > envia os commits para o servidor de acesso
+    - **CONSULTANDO HISTÓRICO**
+        - git status
+            - git status > informações sobre
+            - git status -s > informações comprimidas sobre o projeto.
+            
+            Arquivos novos que não são rastreados têm um ?? do lado, novos arquivos que foram adicionados à
+            área de stage têm um A, arquivos modificados têm um M e assim por diante. Há duas colunas de
+            status na saída: a coluna da esquerda indica o status da área de stage e a coluna da direita indica o
+            status do diretório de trabalho.
+            
+        - git log
+            - git log > Mostra um histórico dos comandos realizados
+            - git log - -oneline > mostra informaões em uma linha
+            - git log -p >mostra informações do que foi alterado no arquivo
+            - git log  - -graph > mostra as linhas de desenvolvimento
+            - git diff [be98621 **..** 0850e6e **>** mostra a diferença dos estados entre os commits analisados
+    - **CLONANDO REPOSITÓRIO**
+        - git clone
+            - git clone endereço > clona um repositório
+    - **DESFAZENDO ALTERAÇÕES** apagando antes de adicioná-las (1), após adicioná-las, mas antes de commitá-las (2), e após realizar o commit (3)
+        - git reset
+            - git reset HEAD [arquivo a ser tirado da stage area já adicionado com o add]
+            
+            este comando irá tirar da zonna de commit, e voltará para a zona add, mantendo as alterações feitas
+            
+        - git checkout
+            - git checkout - -[arquivo] > apaga o arquivo modificado dá area de add
+            
+            apagará as alterações feitas e não estará mais na zona de add
+            
+        - git revert
+            - git revert [número do commit] > cria um commit desfazendo o commit terirado
+    - **CRIANDO E NAVEGANDO NAS BRANCHS**
+        - git branch
+            - git branch [nome] > cria uma linha de trabalho, uma nova ramificação
+            - git branch > lista as ramificações de trabalho
+        - git checkout
+            - git checkout [nome] > muda o ramo/linha de desenvolvimento
+            - git checkout -b [nome] > cria e te coloca em uma nova  branch
+    - **MESCLANDO RAMIFICAÇÕES**
+        - git merge
+            - git merge [branch a ser mesclada],> cria um novo commit (automaticamente) mesclando o conteúdo da branch atual com a branch mesclada
+        - git rebase
+            - git rebase [branch a ser mesclada > ira pegar os commits feitos na branch a ser mesclados e atualizará na branch atual, colocará o head a frente, criando uma única linha, sem ramificaões
+            
+    - **GUARDANDO PARA DEPOIS**
+        - git stash
+            - git stash > Salva um arquivo para trabalho posterior, sem que este seja um coomit ou gere um log, arquivo salvo para trabalhar posteriormente
+            - git stash - -list > traz a lista de tudo que está salvo neste "compartimento"
+            - git stash apply [número do caso] >aplica as modificações feitas anteriormente
+            - git stash pop > retira a última alteração da zona de stash, faz o merge com as alterações que estavam armazenadas
+            
+    - **ATUALIZANDO O PROJETO COM O SERVIDOR**
+        - git pull
+            - git pull [nome do repositório][nome da branch] > pega os dados de um repositório remoto e traz para a branch atual
+    - **VIAJANDO NO TEMPO NOS COMMITS**
+        - git checkout [7 primeiros números do commit desejado] > leva até onde está o commit e não estará mais em nenhuma branch, as alterações feitas aqui não serão salvas, estarão desassociadas do projeto. Para que sejam salvas as alterações, é necessário que após acessar o commit desejado, crie-se, uma nova branch, a partir daí, o trabalho entrará novamente no fluxo
+    - **COMPARANDO ESTADOS DO CÓDIGO**
+        - git diff [be98621 **..** 0850e6e **>** mostra a diferença dos estados entre os commits analisados. Funciona também com branchs
+    - **CONSULTANDO O QUE FOI MODIFICADO, MAS NÃO COMMITADO**
+        
+        git diff > mostra o que foi alterado mais ainda não foi commitado, assim que for comitado não irá mais aparecer no git diff
