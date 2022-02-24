@@ -1,5 +1,5 @@
 Foram 14 tópicos que abordaram desde os motivos de surgimento do git
-e suas funcionalidades.
+e suas funcionalidades..
 Eu já havia estudado um pouco de git anteriormente, mas o conteúdo
 serviu para relembrar alguns conceitos e me introduzir a outros.
 
